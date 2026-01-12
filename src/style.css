@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #111;
+  color: white;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+
+#app {
+  width: 375px;
+  height: 667px;
+  background-color: #222;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  border: 4px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+canvas {
+  display: block;
+}

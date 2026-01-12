@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yakumi Tower</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #222;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    /* Start Screen */
+    #startOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      transition: opacity 0.5s ease;
+    }
+
+    #startOverlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .title {
+      font-size: 4rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: #aaa;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    #startBtn {
+      padding: 1rem 3rem;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    #startBtn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+    }
+
+    /* Score Display */
+    #scoreDisplay {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 10px 20px;
+      border-radius: 20px;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      z-index: 50;
+    }
+
+    /* Game Over Screen */
+    #gameOverScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(15px);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+    }
+
+    #gameOverScreen.show {
+      display: flex;
+    }
+
+    .gameOverTitle {
+      font-size: 3rem;
+      color: #ff6b6b;
+      margin-bottom: 1rem;
+    }
+
+    .finalScore {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 2rem;
+    }
+
+    #rankingList {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      min-width: 300px;
+    }
+
+    .rankingItem {
+      color: white;
+      padding: 10px;
+      margin: 5px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .rankingItem.highlight {
+      background: rgba(102, 126, 234, 0.3);
+      border-radius: 5px;
+    }
+
+    #nameInput {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: 2px solid #667eea;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    #restartBtn {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #restartBtn:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Start Screen -->
+  <div id="startOverlay">
+    <h1 class="title">薬味タワー</h1>
+    <p class="subtitle">Yakumi Tower</p>
+    <button id="startBtn">Start Game</button>
+  </div>
+
+  <!-- Score Display -->
+  <div id="scoreDisplay">Score: <span id="scoreValue">0</span></div>
+
+  <!-- Game Over Screen -->
+  <div id="gameOverScreen">
+    <h2 class="gameOverTitle">Game Over!</h2>
+    <p class="finalScore">Final Score: <span id="finalScoreValue">0</span></p>
+    <div id="rankingList"></div>
+    <input type="text" id="nameInput" placeholder="Enter your name" maxlength="10" style="display:none;">
+    <button id="submitNameBtn"
+      style="display:none; padding: 0.5rem 1.5rem; margin-bottom: 1rem; font-size: 1rem; border: none; border-radius: 20px; background: #4CAF50; color: white; cursor: pointer; font-weight: bold;">Submit</button>
+    <button id="restartBtn">Play Again</button>
+  </div>
+
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
